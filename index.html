@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formulário Pré-Consulta - Preparação Maratona</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 20px;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      overflow: hidden;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 30px;
+      text-align: center;
+    }
+
+    .header h1 { font-size: 28px; margin-bottom: 10px; }
+    .header p { font-size: 16px; opacity: 0.9; }
+
+    .form-content { padding: 30px; }
+
+    .section {
+      margin-bottom: 35px;
+      padding-bottom: 25px;
+      border-bottom: 2px solid #f0f0f0;
+    }
+    .section:last-child { border-bottom: none; }
+
+    .section-title {
+      font-size: 20px;
+      color: #667eea;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-number {
+      background: #667eea;
+      color: white;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+
+    .form-group { margin-bottom: 20px; }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #333;
+      font-weight: 500;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: border-color 0.3s;
+    }
+
+    input[type="text"]:focus,
+    input[type="number"]:focus,
+    textarea:focus,
+    select:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+
+    textarea { resize: vertical; min-height: 80px; }
+
+    .checkbox-group,
+    .radio-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 10px;
+    }
+
+    .checkbox-item,
+    .radio-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    input[type="checkbox"],
+    input[type="radio"] {
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+
+    .sub-question {
+      margin-left: 25px;
+      margin-top: 15px;
+      padding-left: 15px;
+      border-left: 3px solid #667eea;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    @media (max-width: 600px) {
+      .grid-2 { grid-template-columns: 1fr; }
+      .checkbox-group, .radio-group { flex-direction: column; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🏃‍♂️ Formulário Pré-Consulta</h1>
+      <p>Preparação para Maratona</p>
+    </div>
+
+    <div class="form-content">
+      <form id="marathonForm">
+
+        <!-- Seção 1: Dados Gerais -->
+        <div class="section">
+          <h2 class="section-title">
+            <span class="section-number">1</span>
+            Dados Gerais
+          </h2>
+
+          <div class="grid-2">
+            <div class="form-group">
+              <label>Nome completo *</label>
+              <input type="text" name="nome" required />
+            </div>
+
+            <div class="form-group">
+              <label>Idade *</label>
+              <input type="number" name="idade" required />
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="form-group">
+              <label>Sexo *</label>
+              <select name="sexo" required>
+                <option value="">Selecione</option>
+                <option value="masculino">Masculino</option>
+                <option value="feminino">Feminino</option>
+                <option value="outro">Outro</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Altura (cm) *</label>
+              <input type="number" name="altura" required />
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="form-group">
+              <label>Peso atual (kg) *</label>
+              <input type="number" name="peso" step="0.1" required />
+            </div>
+
+            <div class="form-group">
+              <label>Percentual de gordura (se souber)</label>
+              <input type="number" name="percentual_gordura" step="0.1" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Profissão *</label>
+            <input type="text" name="profissao" required />
+          </div>
+
+          <div class="form-group">
+            <label>Rotina diária *</label>
+            <div class="radio-group">
+              <div class="radio-item">
+                <input type="radio" name="rotina" value="pe" id="rotina_pe" required />
+                <label for="rotina_pe">Trabalho em pé</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" name="rotina" value="sentado" id="rotina_sentado" required />
+                <label for="rotina_sentado">Trabalho sentado</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" name="rotina" value="misto" id="rotina_misto" required />
+                <label for="rotina_misto">Misto</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Cidade/Estado *</label>
+            <input type="text" name="cidade" placeholder="Ex: Fortaleza/CE" required />
+          </div>
+        </div>
+
+        <!-- Seção 2: Histórico Esportivo -->
+        <div class="section">
+          <h2 class="section-title">
+            <span class="section-number">2</span>
+            Histórico Esportivo
+          </h2>
+
+          <div class="form-group">
+            <label>Há quanto tempo pratica corrida? *</label>
+            <input type="text" name="tempo_corrida" placeholder="Ex: 2 anos" required />
+          </div>
+
+          <div class="form-group">
+            <label>Já participou de provas? *</label>
+            <div class="checkbox-group" data-exclusive-group="provas">
+              <div class="checkbox-item">
+                <input type="checkbox" name="provas" value="5km" id="prova_5km" />
+                <label for="prova_5km">5 km</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" name="provas" value="10km" id="prova_10km" />
+                <label for="prova_10km">10 km</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" name="provas" value="21km" id="prova_21km" />
+                <label for="prova_21km">21 km</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" name="provas" value="42km" id="prova_42km" />
+                <label for="prova_42km">42 km</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" name="provas" value="nunca" id="prova_nunca" data-exclusive="true" />
+                <label for="prova_nunca">Nunca</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Já correu uma maratona antes? *</label>
+            <div class="radio-group">
+              <div class="radio-item">
+                <input type="radio" name="maratona_antes" value="sim" id="maratona_sim" required />
+                <label for="maratona_sim">Sim</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" name="maratona_antes" value="nao" id="maratona_nao" required />
+                <label for="maratona_nao">Não</label>
+              </div>
+            </div>
+
+            <div class="sub-question">
+              <div class="form-group">
+                <label>Se sim - Tempo final</label>
+                <input type="text" name="tempo_final_anterior" placeholder="Ex: 4h30min" />
+              </div>
+              <div class="form-group">
+                <label>Se sim - Principais dificuldades durante a prova</label>
+                <textarea name="dificuldades_anterior"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Possui acompanhamento de treinador? *</label>
+            <div class="radio-group">
+              <div class="radio-item">
+                <input type="radio" name="treinador" value="sim" id="treinador_sim" required />
+                <label for="treinador_sim">Sim</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" name="treinador" value="nao" id="treinador_nao" required />
+                <label for="treinador_nao">Não</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Seção 3: Treinamento Atual -->
+        <div class="section">
+          <h2 class="section-title">
+            <span class="section-number">3</span>
+            Treinamento Atual
+          </h2>
+
+          <div class="grid-2">
+            <div class="form-group">
+              <label>Quantos dias por semana treina corrida? *</label>
+              <input type="number" name="dias_treino" min="0" max="7" required />
+            </div>
+
+            <div class="form-group">
+              <label>Quilometragem semanal média (km/semana) *</label>
+              <input type="number" name="km_semanal" step="0.1" required />
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="form-group">
+              <label>Treino mais longo atual - longão (km) *</label>
+              <input type="number" name="longao" step="0.1" required />
+            </div>
+
+            <div class="form-group">
+              <label>Ritmo médio dos treinos (min/km) *</label>
+              <input type="text" name="ritmo_medio" placeholder="Ex: 5:30" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Faz treinos de: *</label>
+            <div class="checkbox-group">
+              <div class="checkbox-item">
+                <input type="checkbox" name="tipo_treino" value="rodagem" id="treino_rodagem" />
+                <label for="treino_rodagem">Rodagem leve</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" name="tipo_treino" value="ritmo" id="treino_ritmo" />
+                <label for="treino_ritmo">Ritmo/tempo run</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" name="tipo_treino" value="intervalado" id="treino_intervalado" />
+                <label for="treino_intervalado">Intervalado</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" name="tipo_treino" value="longao" id="treino_longao" />
+                <label for="treino_longao">Longão</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" name="tipo_treino" value="subida" id="treino_subida" />
+                <label for="treino_subida">Subida</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Faz musculação ou treino de força? *</label>
+            <div class="radio-group">
+              <div class="radio-item">
+                <input type="radio" name="musculacao" value="sim" id="musc_sim" required />
+                <label for="musc_sim">Sim</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" name="musculacao" value="nao" id="musc_nao" required />
+                <label for="musc_nao">Não</label>
+              </div>
+            </div>
+
+            <div class="sub-question">
+              <div class="form-group">
+                <label>Se sim - Quantos dias por semana?</label>
+                <input type="number" name="dias_musculacao" min="0" max="7" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Seção 4: Rotina e Horários -->
+        <div class="section">
+          <h2 class="section-title">
+            <span class="section-number">4</span>
+            Rotina e Horários
+          </h2>
+
+          <div class="form-group">
+            <label>Horário habitual dos treinos *</label>
+            <div class="radio-group">
+              <div class="radio-item">
+                <input type="radio" name="horario_treino" value="manha" id="hora_manha" required />
+                <label for="hora_manha">Manhã</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" name="horario_treino" value="tarde" id="hora_tarde" required />
+                <label for="hora_tarde">Tarde</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" name="horario_treino" value="noite" id="hora_noite" required />
+                <label for="hora_noite">Noite</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Treina em jejum? *</label>
+            <div class="radio-group">
+              <div class="radio-item">
+                <input type="radio" name="jejum" value="nunca" id="jejum_nunca" required />
+                <label for="jejum_nunca">Nunca</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" name="jejum" value="as_vezes" id="jejum_as_vezes" required />
+                <label for="jejum_as_vezes">Às vezes</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" name="jejum" value="frequentemente" id="jejum_freq" required />
+                <label for="jejum_freq">Frequentemente</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="form-group">
+              <label>Quantas horas dorme por noite? *</label>
+              <input type="number" name="horas_sono" step="0.5" required />
+            </div>
+
+            <div class="form-group">
+              <label>Nível de estresse diário (0 a 10) *</label>
+              <input type="number" name="estresse" min="0" max="10" required />
+            </div>
+          </div>
+        </div>
+
+        <!-- Seção 5: Alimentação Atual -->
+        <div class="section">
+          <h2 class="section-title">
+            <span class="section-number">5</span>
+            Alimentação Atual
+          </h2>
+
+          <div class="form-group">
+            <label>Quantas refeições faz por dia? *</label>
+            <input type="number" name="refeicoes_dia" min="1" required />
+          </div>
+
+          <div class="form-group">
+            <label>Costuma pular alguma refeição? Qual?</label>
+            <input type="text" name="pula_refeicao" placeholder="Ex: Café da manhã" />
+          </div>
+
+          <div class="form-group">
+            <label>Como é, normalmente, sua alimentação? *</label>
+            <div class="radio-group">
+              <div class="radio-item">
+                <input type="radio" name="tipo_alimentacao" value="caseira" id="alim_caseira" required />
+                <label for="alim_caseira">Caseira</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" name="tipo_alimentacao" value="mista" id="alim_mista" required />
+                <label for="alim_mista">Mista</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" name="tipo_alimentacao" value="industrializados" id="alim_indust" required />
+                <label for="alim_indust">Muito baseada em industrializados</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Consumo de carboidratos *</label>
+            <div class="radio-group">
+              <div class="radio-item">
+                <input type="radio" name="carboidratos" value="baixo" id="carbo_baixo" required />
+                <label for="carbo_baixo">Baixo</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" name="carboidratos" value="moderado" id="carbo_mod" required />
+                <label for="carbo_mod">Moderado</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" name="carboidratos" value="alto" id="carbo_alto" required />
+                <label for="carbo_alto">Alto</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" name="carboidratos" value="nao_sei" id="carbo_nao_sei" required />
+                <label for="carbo_nao_sei">Não sei avaliar</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Costuma consumir alimentos antes do treino? *</label>
+            <div class="radio-group">
+              <div class="radio-item">
+                <input type="radio" name="alimenta_antes" value="sim" id="antes_sim" required />
+                <label for="antes_sim">Sim</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" name="alimenta_antes" value="nao" id="antes_nao" required />
+                <label for="antes_nao">Não</label>
+              </div>
+            </div>
+
+            <div class="sub-question">
+              <div class="form-group">
+                <label>Se sim - Quais alimentos?</label>
+                <textarea name="alimentos_antes"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Alimentação pós-treino costuma acontecer em quanto tempo? *</label>
+            <div class="radio-group">
+              <div class="radio-item">
+                <input type="radio" name="alimenta_pos" value="menos_30" id="pos_30" required />
+                <label for="pos_30">&lt;30 min</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" name="alimenta_pos" value="30_60" id="pos_30_60" required />
+                <label for="pos_30_60">30-60 min</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" name="alimenta_pos" value="mais_1h" id="pos_1h" required />
+                <label for="pos_1h">&gt;1h</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" name="alimenta_pos" value="nao_planeja" id="pos_nao_plan" required />
+                <label for="pos_nao_plan">Não costumo planejar</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Seção 6: Estratégia de Prova -->
+        <div class="section">
+          <h2 class="section-title">
+            <span class="section-number">6</span>
+            Estratégia de Prova
+          </h2>
+
+          <div class="form-group">
+            <label>Já testou estratégias de alimentação durante treinos longos? *</label>
+            <div class="radio-group">
+              <div class="radio-item">
+                <input type="radio" name="testou_estrategia" value="sim" id="estrat_sim" required />
+                <label for="estrat_sim">Sim</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" name="testou_estrategia" value="nao" id="estrat_nao" required />
+                <label for="estrat_nao">Não</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Durante longões, costuma consumir: *</label>
+            <div class="checkbox-group">
+              <div class="checkbox-item">
+                <input type="checkbox" name="consumo_longao" value="gel" id="cons_gel" />
+                <label for="cons_gel">Gel de carboidrato</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" name="consumo_longao" value="bebida" id="cons_bebida" />
+                <label for="cons_bebida">Bebida esportiva</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" name="consumo_longao" value="frutas" id="cons_frutas" />
+                <label for="cons_frutas">Banana / frutas</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" name="consumo_longao" value="nada" id="cons_nada" />
+                <label for="cons_nada">Nada</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" name="consumo_longao" value="outros" id="cons_outros" />
+                <label for="cons_outros">Outros</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Já teve algum sintoma gastrointestinal em treinos ou provas?</label>
+            <div class="checkbox-group" data-exclusive-group="sintomas_gi">
+              <div class="checkbox-item">
+                <input type="checkbox" name="sintomas_gi" value="nausea" id="sint_nausea" />
+                <label for="sint_nausea">Náusea</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" name="sintomas_gi" value="diarreia" id="sint_diarreia" />
+                <label for="sint_diarreia">Diarreia</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" name="sintomas_gi" value="distensao" id="sint_distensao" />
+                <label for="sint_distensao">Distensão abdominal</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" name="sintomas_gi" value="azia" id="sint_azia" />
+                <label for="sint_azia">Azia</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" name="sintomas_gi" value="nenhum" id="sint_nenhum" data-exclusive="true" />
+                <label for="sint_nenhum">Nenhum</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Já teve "quebra" ou queda brusca de rendimento? *</label>
+            <div class="radio-group">
+              <div class="radio-item">
+                <input type="radio" name="quebra" value="sim" id="quebra_sim" required />
+                <label for="quebra_sim">Sim</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" name="quebra" value="nao" id="quebra_nao" required />
+                <label for="quebra_nao">Não</label>
+              </div>
+            </div>
+
+            <div class="sub-question">
+              <div class="form-group">
+                <label>Se sim - Em qual km, aproximadamente?</label>
+                <input type="text" name="km_quebra" placeholder="Ex: km 35" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Seção 7: Hidratação -->
+        <div class="section">
+          <h2 class="section-title">
+            <span class="section-number">7</span>
+            Hidratação
+          </h2>
+
+          <div class="form-group">
+            <label>Quantos litros de água consome por dia (fora treinos)? *</label>
+            <input type="number" name="litros_agua" step="0.1" required />
+          </div>
+
+          <div class="form-group">
+            <label>Usa isotônico durante treinos longos? *</label>
+            <div class="radio-group">
+              <div class="radio-item">
+                <input type="radio" name="isotonico" value="sim" id="iso_sim" required />
+                <label for="iso_sim">Sim</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" name="isotonico" value="nao" id="iso_nao" required />
+                <label for="iso_nao">Não</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Costuma ter:</label>
+            <div class="checkbox-group" data-exclusive-group="sintomas_hidrat">
+              <div class="checkbox-item">
+                <input type="checkbox" name="sintomas_hidrat" value="caibras" id="sint_caibras" />
+                <label for="sint_caibras">Cãibras</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" name="sintomas_hidrat" value="dor_cabeca" id="sint_dor_cabeca" />
+                <label for="sint_dor_cabeca">Dor de cabeça pós-treino</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" name="sintomas_hidrat" value="sede" id="sint_sede" />
+                <label for="sint_sede">Sede excessiva</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" name="sintomas_hidrat" value="nenhum_sint" id="sint_hidrat_nenhum" data-exclusive="true" />
+                <label for="sint_hidrat_nenhum">Nenhum sintoma</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Seção 8: Suplementação -->
+        <div class="section">
+          <h2 class="section-title">
+            <span class="section-number">8</span>
+            Suplementação
+          </h2>
+
+          <div class="form-group">
+            <label>Usa algum suplemento atualmente?</label>
+            <div class="checkbox-group" data-exclusive-group="suplementos">
+              <div class="checkbox-item">
+                <input type="checkbox" name="suplementos" value="whey" id="supl_whey" />
+                <label for="supl_whey">Whey</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" name="suplementos" value="creatina" id="supl_creatina" />
+                <label for="supl_creatina">Creatina</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" name="suplementos" value="cafeina" id="supl_cafeina" />
+                <label for="supl_cafeina">Cafeína</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" name="suplementos" value="gel" id="supl_gel" />
+                <label for="supl_gel">Gel de carboidrato</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" name="suplementos" value="eletrolitos" id="supl_eletrolitos" />
+                <label for="supl_eletrolitos">Eletrólitos</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" name="suplementos" value="vitaminas" id="supl_vitaminas" />
+                <label for="supl_vitaminas">Vitaminas/minerais</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" name="suplementos" value="nenhum_supl" id="supl_nenhum" data-exclusive="true" />
+                <label for="supl_nenhum">Nenhum</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Quem indicou os suplementos?</label>
+            <div class="radio-group">
+              <div class="radio-item">
+                <input type="radio" name="indicacao_supl" value="nutricionista" id="indic_nutri" />
+                <label for="indic_nutri">Nutricionista</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" name="indicacao_supl" value="treinador" id="indic_trein" />
+                <label for="indic_trein">Treinador</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" name="indicacao_supl" value="autoprescricao" id="indic_auto" />
+                <label for="indic_auto">Autoprescrição</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Seção 9: Saúde e Histórico Clínico -->
+        <div class="section">
+          <h2 class="section-title">
+            <span class="section-number">9</span>
+            Saúde e Histórico Clínico
+          </h2>
+
+          <div class="form-group">
+            <label>Possui alguma condição de saúde diagnosticada?</label>
+            <textarea name="condicoes_saude" placeholder="Ex: anemia, gastrite, hipotireoidismo, resistência à insulina, etc."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label>Usa medicamentos contínuos? *</label>
+            <div class="radio-group">
+              <div class="radio-item">
+                <input type="radio" name="medicamentos" value="sim" id="med_sim" required />
+                <label for="med_sim">Sim</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" name="medicamentos" value="nao" id="med_nao" required />
+                <label for="med_nao">Não</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Já teve lesões relacionadas à corrida? *</label>
+            <div class="radio-group">
+              <div class="radio-item">
+                <input type="radio" name="lesoes" value="sim" id="lesao_sim" required />
+                <label for="lesao_sim">Sim</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" name="lesoes" value="nao" id="lesao_nao" required />
+                <label for="lesao_nao">Não</label>
+              </div>
+            </div>
+
+            <div class="sub-question">
+              <div class="form-group">
+                <label>Se sim - Quais lesões?</label>
+                <textarea name="quais_lesoes"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Seção 10: Objetivo com a Maratona -->
+        <div class="section">
+          <h2 class="section-title">
+            <span class="section-number">10</span>
+            Objetivo com a Maratona
+          </h2>
+
+          <div class="form-group">
+            <label>Qual é seu principal objetivo? *</label>
+            <div class="radio-group">
+              <div class="radio-item">
+                <input type="radio" name="objetivo" value="completar" id="obj_completar" required />
+                <label for="obj_completar">Completar a prova</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" name="objetivo" value="melhorar_tempo" id="obj_tempo" required />
+                <label for="obj_tempo">Melhorar tempo</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" name="objetivo" value="performance" id="obj_performance" required />
+                <label for="obj_performance">Performance máxima</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" name="objetivo" value="experiencia" id="obj_exp" required />
+                <label for="obj_exp">Experiência pessoal</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Tempo alvo (se houver)</label>
+            <input type="text" name="tempo_alvo" placeholder="Ex: 3h45min" />
+          </div>
+
+          <div class="form-group">
+            <label>Maior dificuldade que sente hoje nos treinos? *</label>
+            <textarea name="maior_dificuldade" required></textarea>
+          </div>
+        </div>
+
+        <!-- Seção 11: Pergunta Final Estratégica -->
+        <div class="section">
+          <h2 class="section-title">
+            <span class="section-number">11</span>
+            Pergunta Final Estratégica
+          </h2>
+
+          <div class="form-group">
+            <label>O que você espera do acompanhamento nutricional para essa maratona? *</label>
+            <textarea name="expectativa_nutricional" required></textarea>
+          </div>
+        </div>
+
+        <button type="submit" class="submit-btn">Enviar Formulário</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // "Nenhum/Nunca" desmarca o resto no mesmo grupo
+    function setupExclusiveCheckboxGroups() {
+      const groups = document.querySelectorAll('[data-exclusive-group]');
+      groups.forEach(groupEl => {
+        const checkboxes = Array.from(groupEl.querySelectorAll('input[type="checkbox"]'));
+        if (!checkboxes.length) return;
+
+        const exclusive = checkboxes.filter(cb => cb.dataset.exclusive === 'true');
+
+        checkboxes.forEach(cb => {
+          cb.addEventListener('change', () => {
+            const isExclusive = cb.dataset.exclusive === 'true';
+
+            if (cb.checked && isExclusive) {
+              // marcou "Nenhum/Nunca" => desmarca outros
+              checkboxes.forEach(other => {
+                if (other !== cb) other.checked = false;
+              });
+            } else if (cb.checked && !isExclusive) {
+              // marcou um normal => desmarca "Nenhum/Nunca"
+              exclusive.forEach(ex => ex.checked = false);
+            }
+          });
+        });
+      });
+    }
+
+    setupExclusiveCheckboxGroups();
+
+    document.getElementById('marathonForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      // Validação extra (caso algum radio "required" fique sem marcar em browsers antigos)
+      if (!this.checkValidity()) {
+        this.reportValidity();
+        return;
+      }
+
+      const formData = new FormData(this);
+      const data = {};
+
+      formData.forEach((value, key) => {
+        if (data[key]) {
+          if (Array.isArray(data[key])) data[key].push(value);
+          else data[key] = [data[key], value];
+        } else {
+          data[key] = value;
+        }
+      });
+
+      console.log('Dados do formulário:', data);
+      alert('Formulário enviado com sucesso! Os dados foram registrados no console do navegador.');
+    });
+  </script>
+</body>
+</html>
