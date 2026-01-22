@@ -921,5 +921,91 @@
       alert('Formulário enviado com sucesso! Os dados foram registrados no console do navegador.');
     });
   </script>
+  <script type="module">
+    import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+  
+    // 1) Cole aqui suas credenciais
+    const SUPABASE_URL = "https://wuxwzcphynabrwjdihad.supabase.co";
+    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind1eHd6Y3BoeW5hYnJ3amRpaGFkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjkwMzgxMTUsImV4cCI6MjA4NDYxNDExNX0.BTaGJ_rdTBoyi9OA6lz8L55BECOHgqQCgxFSVDkvoIc";
+  
+    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  
+    // (Opcional) "Nenhum/Nunca" desmarca outros (igual eu tinha te passado)
+    function setupExclusiveCheckboxGroups() {
+      const groups = document.querySelectorAll('[data-exclusive-group]');
+      groups.forEach(groupEl => {
+        const checkboxes = Array.from(groupEl.querySelectorAll('input[type="checkbox"]'));
+        const exclusive = checkboxes.filter(cb => cb.dataset.exclusive === 'true');
+  
+        checkboxes.forEach(cb => {
+          cb.addEventListener('change', () => {
+            const isExclusive = cb.dataset.exclusive === 'true';
+            if (cb.checked && isExclusive) {
+              checkboxes.forEach(other => { if (other !== cb) other.checked = false; });
+            } else if (cb.checked && !isExclusive) {
+              exclusive.forEach(ex => ex.checked = false);
+            }
+          });
+        });
+      });
+    }
+    setupExclusiveCheckboxGroups();
+  
+    const form = document.getElementById("marathonForm");
+    const btn = form.querySelector('button[type="submit"]');
+    const originalBtnText = btn.textContent;
+  
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+  
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+  
+      // UI: trava botão
+      btn.disabled = true;
+      btn.textContent = "Enviando...";
+  
+      try {
+        const formData = new FormData(form);
+        const data = {};
+  
+        // transforma em objeto (checkbox múltiplo vira array)
+        formData.forEach((value, key) => {
+          if (data[key]) {
+            if (Array.isArray(data[key])) data[key].push(value);
+            else data[key] = [data[key], value];
+          } else {
+            data[key] = value;
+          }
+        });
+  
+        // 2) Insere no Supabase
+        const { error } = await supabase
+          .from("pre_consulta_maratona")
+          .insert([{
+            nome: data.nome ?? null,
+            idade: data.idade ? Number(data.idade) : null,
+            sexo: data.sexo ?? null,
+            cidade: data.cidade ?? null,
+            data: data
+          }]);
+  
+        if (error) throw error;
+  
+        alert("✅ Formulário enviado com sucesso!");
+        form.reset();
+  
+      } catch (err) {
+        console.error(err);
+        alert("❌ Não foi possível enviar. Tente novamente.");
+      } finally {
+        btn.disabled = false;
+        btn.textContent = originalBtnText;
+      }
+    });
+  </script>
+  
 </body>
 </html>
